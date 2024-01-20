@@ -21,6 +21,8 @@ def get_pokemon_list():
 
 @eel.expose
 def get_pokemon_details(pokemon_name):
+    
+    print(f"Fetching data on {pokemon_name}...")
     url=f"{base_url}{pokemon_name}"
     data=requests.get(url)
     if data.status_code==200:
@@ -35,8 +37,6 @@ def get_pokemon_details(pokemon_name):
     
     else:
         return None
-    
-
 
 if __name__ == '__main__':
     eel.start('index.html', size=(700, 500))

@@ -6,38 +6,58 @@ document.addEventListener("DOMContentLoaded",function(){
 
 })
 
+
+const clickedmons=new Set();
+
 function display_poke_list(poke_list){
 
     console.log("Displaying Pokemon List");
     console.log(poke_list)
     const pokemonListDiv=document.getElementById("pokemon-list");
 
-    for(let i=0;i<poke_list.length;i++)
-    {
-        const pokemon=poke_list[i];
-        const listItem = `<li onclick="getPokemonDetails('${pokemon}')">${pokemon}</li>`;
-        pokemonListDiv.innerHTML+=listItem
+    for (let i = 0; i < poke_list.length; i++) {
+        const pokemon = poke_list[i];
+
+        const listItem = document.createElement('div');
+        listItem.textContent = pokemon;
+        listItem.className = 'listitem';
+        listItem.id=`${pokemon}`
+
+
+        listItem.onclick = function () {
+
+            if(!clickedmons.has(pokemon)){
+                clickedmons.add(pokemon)
+                eel.get_pokemon_details(pokemon)(display_pokemon);
+            } 
+        };
+
+        pokemonListDiv.appendChild(listItem);
+        
+        
     }
 }
 
 function display_pokemon(pokemonDetails) {
-    const pokemonDetailsDiv = document.getElementById('pokemon-details');
-    pokemonDetailsDiv.innerHTML = '<h2>Pokémon Details</h2>';
+    parent=document.getElementById(`${pokemonDetails.name}`);
 
-    if (pokemonDetails) {
-        const details = `
-            <p>Name: ${pokemonDetails.name}</p>
-            <p>Height: ${pokemonDetails.height}</p>
-            <p>Weight: ${pokemonDetails.weight}</p>
-            <img src="${pokemonDetails.sprites.front_default}" alt="${pokemonDetails.name} front sprite">
-            <img src="${pokemonDetails.sprites.back_default}" alt="${pokemonDetails.name} back sprite">
-        `;
-        pokemonDetailsDiv.innerHTML += details;
-    } else {
-        pokemonDetailsDiv.innerHTML += '<p>Error loading Pokémon details.</p>';
+    if(pokemonDetails){
+        const child =document.createElement("div");
+
+        child.innerHTML=`
+        <div class="pokemon-details">
+            <p><strong>Name:</strong> ${pokemonDetails.name}</p>
+            <p><strong>Height:</strong> ${pokemonDetails.height}</p>
+            <p><strong>Weight:</strong> ${pokemonDetails.weight}</p>
+        </div>`;
+           
+        
+        parent.appendChild(child)
+    }else{
+        child=`<div>Error</div>`
+        parent.appendChild(child)
     }
-}
 
-function getPokemonDetails(pokemonName) {
-    eel.get_pokemon_details(pokemonName)();
 }
+   
+

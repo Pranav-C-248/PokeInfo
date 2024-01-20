@@ -23,7 +23,7 @@
             margin-top: 20px;
         }
 
-        ul {
+        .listitem {
             list-style-type: none;
             padding: 0;
             display: flex;
@@ -31,7 +31,7 @@
             justify-content: center;
         }
 
-        li {
+        .listitem {
             margin: 5px;
             padding: 10px;
             background-color: #fff;
@@ -40,33 +40,39 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
-        li:hover {
+        .pokemon-details {
+            margin: 5px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .listitem:hover {
             background-color: #e0e0e0;
         }
 
-        #pokemon-details {
-            margin-top: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
 
         img {
             max-width: 100%;
             height: auto;
             margin-top: 10px;
         }
+        .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
     <h1>Pokédex</h1>
     <div id="pokemon-list"></div>
-    <div id="pokemon-details"></div>
+  
 
     <script type="text/javascript" src="eel.js"></script>
     <script type="text/javascript" src="main.js"></script>
